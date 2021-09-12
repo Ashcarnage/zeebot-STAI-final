@@ -1,0 +1,638 @@
+version: '2.0'
+config:
+  store_entities_as_slots: true
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- human_handoff:
+    use_entities: true
+- id_deny:
+    use_entities: true
+- id_affirm:
+    use_entities: true
+- principal_go:
+    use_entities: true
+- contact_principal:
+    use_entities: true
+- email_details:
+    use_entities: true
+- other_contacts:
+    use_entities: true
+- school_timings:
+    use_entities: true
+- leave_go:
+    use_entities: true
+- Leave_application:
+    use_entities: true
+- mail_id_message:
+    use_entities: true
+- mail_id_subject:
+    use_entities: true
+- mail_id_email:
+    use_entities: true
+- send_email:
+    use_entities: true
+- greet:
+    use_entities: true
+- seek_options:
+    use_entities: true
+- seek_zoom:
+    use_entities: true
+- fill_id_info:
+    use_entities: true
+- seek_exam_syllabus:
+    use_entities: true
+- seek_school_vid:
+    use_entities: true
+- affirm:
+    use_entities: true
+- bot_challenge:
+    use_entities: true
+- stop:
+    use_entities: true
+- goodbye:
+    use_entities: true
+- deny:
+    use_entities: true
+- mood_great:
+    use_entities: true
+- mood_unhappy:
+    use_entities: true
+- seek_school_location:
+    use_entities: true
+- seek_exam_timetable:
+    use_entities: true
+- seek_COVIDinfo:
+    use_entities: true
+- seek_fees:
+    use_entities: true
+- seek_admission_details:
+    use_entities: true
+- seek_academic_calendar:
+    use_entities: true
+- enter_month:
+    use_entities: true
+- seek_uniform:
+    use_entities: true
+- seek_holiday:
+    use_entities: true
+- seek_report_card:
+    use_entities: true
+- seek_events:
+    use_entities: true
+- seek_timetable:
+    use_entities: true
+- chitchat:
+    use_entities: true
+- seek_contact_school:
+    use_entities: true
+- seek_contact_teachers:
+    use_entities: true
+- reset_id:
+    use_entities: true
+- nlu_fallback:
+    use_entities: true
+entities:
+- transfer
+- deny
+- affirm
+- message
+- subject
+- email
+- class
+- exam
+- hol
+- idno
+- month
+- subject1
+- uniform
+- event
+- break
+slots:
+  transfer:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  deny:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  affirm:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  message3:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  subject2:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  email2:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  message2:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  subject:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  message:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  email:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  idno:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  class:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  exam:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  subject1:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  month:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  uniform:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  hol:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  event:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  requested_slot:
+    type: rasa.shared.core.slots.UnfeaturizedSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+responses:
+  utter_show_options:
+  - buttons:
+    - payload: /fill_id_info
+      title: Enter ID
+    - payload: /reset_id
+      title: Reset ID
+    - payload: /seek_zoom
+      title: Zoom IDs
+    - payload: /school_timings
+      title: School Timings
+    - payload: /seek_report_card
+      title: Report Card
+    - payload: /send_email
+      title: Send an Email
+    - payload: /Leave_application
+      title: Leave Note
+    - payload: /school_timings
+      title: School Timings
+    - payload: /seek_timetable
+      title: Class Timetable
+    - payload: /seek_contact_school
+      title: School Contact Info
+    - payload: /seek_contact_teachers
+      title: Teachers' Gmail Info
+    - payload: /seek_exam_syllabus
+      title: Exam Syllabus
+    - payload: /seek_exam_timetable
+      title: Exam Timetable 2020-21
+    - payload: /seek_academic_calendar
+      title: Academic Calendar 2020-21
+    - payload: /seek_events
+      title: Events
+    - payload: /seek_holiday
+      title: Holidays
+    - payload: /seek_admission_details
+      title: Admission Details
+    - payload: /seek_fees
+      title: Fee Structure
+    - payload: /seek_school_location
+      title: School Location
+    - payload: /seek_uniform
+      title: School Uniform
+    - payload: /seek_school_vid
+      title: School Video
+    - payload: /seek_COVIDinfo
+      title: COVID-19 info
+    text: What can i do for you ?
+  utter_doubtshoot:
+  - text: Sorry! I wasn't more helpful. Try me again for further clarification
+  utter_greet:
+  - text: Hey! How are you?
+  utter_cheer_up:
+  - image: https://i.imgur.com/nGF1K8f.jpg
+    text: 'Here is something to cheer you up:'
+  utter_happy:
+  - text: Great!!
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+  utter_whatelse:
+  - text: What else can i help you with?
+  utter_req:
+  - text: This feature requires authentication. Please enter your ID number if not already filled.
+  utter_bye:
+  - text: Bye👋 Hope to see you soon!
+  - text: Bye! Catch you later
+  utter_ask_stop:
+  - buttons:
+    - payload: /affirm
+      title: Yes
+    - payload: /deny
+      title: No
+    text: Are you sure you want to continue without this?
+  utter_confirming_id:
+  - buttons:
+    - payload: /id_affirm
+      title: Yes
+    - payload: /id_deny
+      title: Stop
+    text: Do you want to proceed logging in?
+  utter_ask_transfer:
+  - buttons:
+    - payload: /human_handoff{{"transfer":"human"}}
+    text: "Hmmm, good question!\n\nSorry, I can't seem to find the right answer for you \n\nI can connect to a human if you like"
+ 
+  utter_ask_idno:
+  - text: Please enter your ID number.
+  utter_ask_email:
+  - text: Please provide your email to send a copy of your report card to your account
+  utter_ask_email2:
+  - text: Can I have you email ID please
+  utter_id_success:
+  - text: Success! Your id number is {idno}
+  utter_school_location:
+  - image: https://i.imgur.com/RD2e0JC.jpeg
+    text: The XYZ international school is situated in Street 1800
+  utter_ask_class:
+  - text: Please enter your class and section.
+  utter_ask_subject:
+  - text: Please enter the subject of your email
+  utter_ask_exam:
+  - buttons:
+    - payload: /seek_exam_syllabus{{"exam":"periodic"}}
+      title: Periodic Test
+    - payload: /seek_exam_syllabus{{"exam":"half yearly"}}
+      title: Half Yearly
+    - payload: /seek_exam_syllabus{{"exam":"preboard"}}
+      title: Preboard
+    - payload: /seek_exam_syllabus{{"exam":"final"}}
+      title: Final Exam
+    text: Kindly select exam.
+  utter_ask_subject1:
+  - buttons:
+    - payload: /seek_exam_syllabus{{"subject1":"maths"}}
+      title: Mathematics
+    - payload: /seek_exam_syllabus{{"subject1":"phy"}}
+      title: Physics
+    - payload: /seek_exam_syllabus{{"subject1":"chem"}}
+      title: Chemistry
+    - payload: /seek_exam_syllabus{{"subject1":"eng"}}
+      title: English
+    - payload: /seek_exam_syllabus{{"subject1":"cs"}}
+      title: Computer Science
+    text: Kindly select subject.
+  utter_exam_timetable:
+  - image: https://i.imgur.com/xOQ9o2v.png
+    text: Here's the exam date sheet for the academic year 2021-22.
+  utter_show_fees:
+  - image: https://i.imgur.com/rL2nqKT.jpeg
+    text: Here is the fee structure.
+  utter_show_admission_details:
+  - image: https://i.imgur.com/vnHjq5Q.png
+    text: Here are some details regarding admissions.
+  utter_ask_month:
+  - buttons:
+    - payload: /seek_academic_calendar{{"month":"September"}}
+      title: September 2021
+    - payload: /seek_academic_calendar{{"month":"October"}}
+      title: October 2021
+    - payload: /seek_academic_calendar{{"month":"November"}}
+      title: November 2021
+    - payload: /seek_academic_calendar{{"month":"December"}}
+      title: December 2021
+    - payload: /seek_academic_calendar{{"month":"January"}}
+      title: January 2022
+    - payload: /seek_academic_calendar{{"month":"February"}}
+      title: February 2022
+    - payload: /seek_academic_calendar{{"month":"March"}}
+      title: March 2022
+    - payload: /seek_academic_calendar{{"month":"April"}}
+      title: April 2022
+    - payload: /seek_academic_calendar{{"month":"May"}}
+      title: May 2022
+    - payload: /seek_academic_calendar{{"month":"June"}}
+      title: June 2022
+    - payload: /seek_academic_calendar{{"month":"July"}}
+      title: July 2022
+    - payload: /seek_academic_calendar{{"month":"August"}}
+      title: August 2022
+    text: Which month's schedule would you like to see?
+  utter_ask_uniform:
+  - buttons:
+    - payload: /seek_uniform{{"uniform":"senior"}}
+      title: Senior section
+    - payload: /seek_uniform{{"uniform":"junior"}}
+      title: Junior section
+    text: Which uniform would you like to see
+  utter_ask_hol:
+  - buttons:
+    - payload: /seek_holiday{{"hol":"summer"}}
+      title: Summer Vacation
+    - payload: /seek_holiday{{"hol":"winter"}}
+      title: Winter Vacation
+    - payload: /seek_holiday{{"hol":"other"}}
+      title: Other holidays
+    text: Which break schedule would you like to see?
+  utter_ask_event:
+  - buttons:
+    - payload: /seek_events{{"event":"mun"}}
+      title: MUN
+    - payload: /seek_events{{"event":"fest"}}
+      title: FEST
+    - payload: /seek_events{{"event":"quiz"}}
+      title: QUIZ
+    - payload: /seek_events{{"event":"art"}}
+      title: ART
+    text: Which event's details would you like to see?
+  utter_school_contact:
+  - image: https://i.imgur.com/rL2nqKT.jpeg
+    text: You can contact us through the Email as well as by calling us!
+  utter_respond_chitchat:
+  - text: The weather is fairly pleasant right now!
+  utter_provide_id:
+  - text: please provide the email ID
+  utter_provide_subject:
+  - buttons:
+    - payload: /mail_id_subject{{"subject":"Participation"}}
+      title: Participation
+    - payload: /mail_id_subject{{"subject":"TC"}}
+      title: TC
+    - payload: /mail_id_subject{{"subject":"Complaint"}}
+      title: Complaint
+    - payload: /mail_id_subject{{"subject":"Recommendation"}}
+      title: Recommendations
+    - payload: /mail_id_subject{{"subject":"Donations"}}
+      title: Donations
+    - payload: /mail_id_subject{{"subject":"Delay"}}
+      title: Extention of the due date
+    - payload: /mail_id_subject{{"subject":"Scholarship"}}
+      title: Scholarship
+    text: Can you give the subject of your mail
+  utter_ask_subject2:
+  - buttons:
+    - payload: /mail_id_subject{{"subject":"Participation"}}
+      title: Participation
+    - payload: /mail_id_subject{{"subject":"TC"}}
+      title: TC
+    - payload: /mail_id_subject{{"subject":"Complaint"}}
+      title: Complaint
+    - payload: /mail_id_subject{{"subject":"Recommendation"}}
+      title: Recommendations
+    - payload: /mail_id_subject{{"subject":"Donations"}}
+      title: Donations
+    - payload: /mail_id_subject{{"subject":"Delay"}}
+      title: Extention of the due date
+    - payload: /mail_id_subject{{"subject":"Scholarship"}}
+      title: Scholarship
+    text: What is the Subject of your mail ?
+  utter_ask_message:
+  - text: what message do you want to deliver?
+  utter_ask_message3:
+  - text: Please enter your message
+  utter_leave_proceed:
+  - buttons:
+    - payload: /leave_go
+      title: Yes
+    - payload: /deny
+      title: Drop It
+    text: You are hereby applying for a Leave Application!  DO YOU WANT TO PROCEED?
+  utter_ask_message2:
+  - text: Please give a fare reason as to why are you applying for a leave for the body of the message.
+  utter_school_timings:
+  - image: https://i.imgur.com/7VLEZMf.jpeg
+    text: Here are the timings from Kg to 12th. Due to online classes there might be changes in the time schedule ...
+  utter_did_that_help:
+  - buttons:
+    - payload: /affirm{{"affirm":"yes"}}
+      title: 👍
+    - payload: /deny{{"deny":"no"}}
+      title: 👎
+    text: Was that of much help?
+  utter_goodbye:
+  - condition:
+    - name: affirm
+      type: slot
+      value: yes
+    text: Thats Great!!
+  - condition:
+    - name: deny
+      type: slot
+      value: no
+    text: ohh! I will try to do better if you rephrase it in a different way
+  utter_related_details_1:
+  - buttons:
+    - payload: /seek_fees
+      title: School Fees
+    - payload: /seek_contact_school
+      title: Contacts of school officials
+    - payload: /seek_options
+      title: Other
+    text: In need for related details ... Check this out!
+  utter_related_details_2:
+  - buttons:
+    - payload: /seek_exam_timetable
+      title: Exam dates
+    - payload: /seek_report_card
+      title: Report Card
+    - payload: /seek_options
+      title: Other
+    text: In need for related details ... Check this out!
+  utter_related_details_3:
+  - buttons:
+    - payload: /seek_events
+      title: Events
+    - payload: /seek_contact_school
+      title: Contacts of school officials
+    - payload: /seek_options
+      title: Other
+    text: In need for related details ... Check this out!
+  utter_related_details_4:
+  - buttons:
+    - payload: /seek_exam_syllabus
+      title: Exam syllabus
+    - payload: /seek_zoom
+      title: Zoom IDs
+    - payload: /seek_options
+      title: Other
+    text: You might wanna have a look at some relevent details...
+  utter_related_details_5:
+  - buttons:
+    - payload: /seek_zoom
+      title: Zoom ID
+    - payload: /seek_timetable
+      title: Timetable
+    - payload: /seek_options
+      title: Other
+    text: You might wanna have a look at some relevent details...
+  utter_related_details_6:
+  - buttons:
+    - payload: /school_timings
+      title: School Timings
+    - payload: /seek_academic_calendar
+      title: Calendar
+    - payload: /seek_options
+      title: Other
+    text: You might wanna have a look at some relevent details...
+  utter_contact_who:
+  - buttons:
+    - payload: /contact_principal
+      title: The Principal
+    - payload: /other_contacts
+      title: Other officials
+    text: Who do you want to contact
+  utter_message_now:
+  - buttons:
+    - payload: /principal_go
+      title: Yes
+    - payload: /deny
+      title: Nevermind
+    text: |-
+      Here's the principal's Email ID 
+
+       - xyzinternational.s@gmail.com 
+
+      Do want to email now?
+actions:
+- action_default_fallback
+- action_send_princi
+- show_email_ids
+- school_contacts
+- leave_note_submit
+- email_submit
+- action_show_COVIDinfo
+- action_show_academic_calendar
+- action_show_exam_syllabus
+- action_show_holiday
+- action_show_school_vid
+- action_show_uniform
+- action_show_zoom
+- utter_ask_stop
+- utter_greet
+- utter_iamabot
+- utter_show_options
+- utter_whatelse
+- validate_id_form
+- action_show_report_card
+- action_show_events
+- action_show_timetable
+- action_reset_id
+forms:
+  id_form:
+    required_slots:
+      idno:
+      - entity: idno
+        type: from_entity
+  exam_form:
+    required_slots:
+      class:
+      - entity: class
+        type: from_entity
+      exam:
+      - entity: exam
+        type: from_entity
+      subject1:
+      - entity: subject1
+        type: from_entity
+  academic_calendar_form:
+    required_slots:
+      month:
+      - entity: month
+        type: from_entity
+  uniform_form:
+    required_slots:
+      uniform:
+      - entity: uniform
+        type: from_entity
+  holiday_form:
+    required_slots:
+      hol:
+      - entity: hol
+        type: from_entity
+  events_form:
+    required_slots:
+      event:
+      - entity: event
+        type: from_entity
+  timetable_form:
+    required_slots:
+      class:
+      - type: from_text
+  leave_note:
+    required_slots:
+      message2:
+      - type: from_text
+  report_card:
+    required_slots:
+      email:
+      - entity: email
+        intent: mail_id_email
+        type: from_entity
+  principal_contact:
+    required_slots:
+      message3:
+      - type: from_text
+      subject2:
+      - type: from_text
+  send_email_form:
+    required_slots:
+      email2:
+      - type: from_text
+      message:
+      - type: from_text
+      subject:
+      - type: from_text
+  nlu_fallback:
+    required_slots:
+      transfer:
+      - entity: transfer
+        intent: human_handoff
+        type: from_entity
+e2e_actions: []

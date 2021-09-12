@@ -1,0 +1,579 @@
+version: "2.0"
+
+stories:
+
+# - story: happy path
+#   steps:
+#   - intent: greet
+#   - action: utter_when_start
+#   - action: utter_show_options
+#   - intent: mood_great
+#   - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - or:
+    - intent: affirm
+      entities:
+      - affirm: "yes"
+    - intent: deny
+      entities:
+      - deny: 'no'
+  - action: utter_goodbye
+  - action: utter_show_options
+
+# - story: sad path 2
+#   steps:
+#   - intent: greet
+#   - action: utter_show_options
+#   - intent: mood_unhappy
+#   - action: utter_cheer_up
+#   - action: utter_did_that_help
+#   - intent: deny
+#   - action: utter_goodbye
+
+# ID STORIES
+- story: interactive_story_1 (ID FORM 1)
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: fill_id_info
+  - action: utter_confirming_id
+  - intent: id_affirm
+  - action: id_form
+  - active_loop: id_form
+  - slot_was_set:
+    - requested_slot: idno
+  - slot_was_set:
+    - idno: '13493'
+  - slot_was_set:
+    - idno: '13493'
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_show_options
+
+- story: interactive_story_1 (ID FORM 1)- sad
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: fill_id_info
+  - action: utter_confirming_id
+  - intent: id_deny
+  - action: utter_show_options
+- story: User doesn't want to fill form (ID FORM 2)
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: fill_id_info
+  - action: utter_confirming_id
+  - intent: id_affirm
+  - action: id_form
+  - active_loop: id_form
+  - intent: stop
+  - action: utter_ask_stop
+  - or:
+    - intent: stop
+    - intent: affirm
+  - action: action_deactivate_loop
+  - active_loop: null
+  - action: utter_show_options
+
+- story: ID FORM 3
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: fill_id_info
+  - action: utter_confirming_id
+  - intent: id_affirm
+  - action: id_form
+  - active_loop: id_form
+  - slot_was_set:
+    - requested_slot: idno
+  - intent: bot_challenge
+  - action: utter_iamabot
+  - action: id_form
+  - slot_was_set:
+    - requested_slot: idno
+  - intent: stop
+  - action: utter_ask_stop
+  - intent: affirm
+  - action: action_deactivate_loop
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+    - idno: null
+  - action: utter_show_options
+# DENY ID
+- story: denying idno
+  steps:
+  - intent: fill_id_info
+  - action: utter_confirming_id
+  - intent: deny
+  - action: utter_show_options
+# SCHOOL VIDEO
+- story: school video - happy
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: seek_school_vid
+  - action: action_show_school_vid
+  - action: utter_did_that_help
+  - or:
+    - intent: affirm
+      entities:
+      - affirm: "yes"
+    - intent: deny
+      entities:
+      - deny: 'no'
+  - action: utter_goodbye
+  - action: utter_show_options
+
+- story: school video - sad
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: seek_school_vid
+  - action: action_show_school_vid
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_doubtshoot
+  - action: utter_show_options
+
+
+# SCHOOL LOCATION
+- story: school location
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: seek_school_location
+  - action: utter_school_location
+  - action: utter_show_options
+
+# EXAM SYLLABUS
+- story: Exam Syllabus Changed Mind
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: seek_exam_syllabus
+  - action: exam_form
+  - active_loop: exam_form
+  - slot_was_set:
+    - requested_slot: class
+  - intent: bot_challenge
+  - action: utter_iamabot
+  - action: exam_form
+  - slot_was_set:
+    - requested_slot: class
+  - intent: stop
+  - action: utter_ask_stop
+  - intent: affirm
+  - action: action_deactivate_loop
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+    - class: null
+  - action: utter_show_options
+# EXAM TIMETABLE
+- story: exam timetable
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: seek_exam_timetable
+  - action: utter_exam_timetable
+  - action: utter_did_that_help
+  - or:
+    - intent: affirm
+      entities:
+      - affirm: "yes"
+    - intent: deny
+      entities:
+      - deny: 'no'
+  - action: utter_goodbye
+  - action: utter_show_options
+# OPTIONS
+- story: display options
+  steps:
+  - intent: greet
+  - action: utter_show_options
+
+# GOODBYE
+- story: say goodbye when departed
+  steps:
+  - intent: goodbye
+  - action: utter_bye
+# EXAM SYLLABUS
+- story: exam syllabus path 1
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: seek_exam_syllabus
+  - action: exam_form
+  - active_loop: exam_form
+  - slot_was_set:
+    - requested_slot: class
+  - slot_was_set:
+    - class: 12B
+  - slot_was_set:
+    - class: 12B
+  - slot_was_set:
+    - requested_slot: exam
+  - slot_was_set:
+    - exam: periodic
+  - slot_was_set:
+    - exam: periodic
+  - slot_was_set:
+    - requested_slot: subject1
+  - slot_was_set:
+    - subject1: maths
+  - slot_was_set:
+    - subject1: maths
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_show_exam_syllabus
+  - action: utter_related_details_4
+  # - action: utter_show_options
+  # - intent: fill_id_info
+  # - action: id_form
+  # - active_loop: id_form
+  # - slot_was_set:
+  #   - requested_slot: idno
+- story: exam syllabus path (2)
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: seek_exam_syllabus
+  - action: exam_form
+  - active_loop: exam_form
+  - slot_was_set:
+    - requested_slot: class
+  - slot_was_set:
+    - class: 12B
+  - slot_was_set:
+    - class: 12B
+  - slot_was_set:
+    - requested_slot: exam
+  - slot_was_set:
+    - exam: periodic
+  - slot_was_set:
+    - exam: periodic
+  - slot_was_set:
+    - requested_slot: subject1
+  - slot_was_set:
+    - subject1: maths
+  - slot_was_set:
+    - subject1: maths
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_show_exam_syllabus
+  - intent: id_affirm
+  - action: id_form
+  - active_loop: id_form
+  - slot_was_set:
+    - requested_slot: idno
+  - slot_was_set:
+    - idno: '13493'
+  - slot_was_set:
+    - idno: '13493'
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  # - action: exam_form
+  # - active_loop: exam_form
+  # - slot_was_set:
+  #   - requested_slot: class
+  # - slot_was_set:
+  #   - class: 12B
+  # - slot_was_set:
+  #   - class: 12B
+  # - slot_was_set:
+  #   - requested_slot: exam
+  # - slot_was_set:
+  #   - exam: periodic
+  # - slot_was_set:
+  #   - exam: periodic
+  # - slot_was_set:
+  #   - requested_slot: subject1
+  # - slot_was_set:
+  #   - subject1: maths
+  # - slot_was_set:
+  #   - subject1: maths
+  # - slot_was_set:
+  #   - requested_slot: null
+  # - active_loop: null
+  - action: action_show_exam_syllabus
+  - action: utter_related_details_4
+# ZOOM 
+- story: zoom path 1
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: seek_zoom
+  - action: action_show_zoom
+  # - slot_was_set:
+  #   - idno: None
+  - action: utter_related_details_6
+  
+- story: zoom path 2
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: seek_zoom
+  - action: action_show_zoom
+  - intent: id_affirm
+  - action: id_form
+  - active_loop: id_form
+  - active_loop: null
+  - action: action_show_zoom
+  - action: utter_related_details_6
+
+
+# REPORT CARD
+- story: report card path 1
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: seek_report_card
+  - action: report_card
+  - active_loop: report_card
+  - slot_was_set:
+    - requested_slot: email
+  - slot_was_set:
+    - email: bhakat2004@gmail.com
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_show_report_card
+  - action: utter_related_details_3
+
+- story: report card path 2
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: seek_report_card
+  - action: report_card
+  - active_loop: report_card
+  - slot_was_set:
+    - requested_slot: email
+  - slot_was_set:
+    - email: bhakat2004@gmail.com
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_show_report_card
+  - intent: id_affirm
+  - action: id_form
+  - active_loop: id_form
+  - slot_was_set:
+    - requested_slot: idno
+  - slot_was_set:
+    - idno: '13493'
+  - slot_was_set:
+    - idno: '13493'
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: report_card
+  - active_loop: report_card
+  - slot_was_set:
+    - requested_slot: email
+  - slot_was_set:
+    - email: bhakat2004@gmail.com
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_show_report_card  
+  - action: utter_related_details_3
+  
+ # Send Email
+- story: send email
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: send_email
+  - action: send_email_form
+  - active_loop: send_email_form
+  #- action: utter_provide_id
+  # - intent: mail_id_email
+  #   entities:
+  #   - email: xyzinternational.s@gmail.com
+  # - slot_was_set:
+  #   - email: xyzinternational.s@gmail.com
+  # - action: utter_provide_subject
+  # - intent: mail_id_subject
+  #   entities:
+  #   - subject: participation
+  # - slot_was_set:
+  #   - subject: participation
+  # - action: utter_provide_message
+  # - intent: mail_id_message
+  #   entities:
+  #   - message: Hello this is a meesage from the xyz chatbot
+  # - slot_was_set:
+  #   - message: Hello this is a meesage from the xyz chatbot
+  - active_loop: null
+  - action: email_submit
+  - action: utter_show_options
+
+# leave note
+- story: leave note
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: Leave_application
+  - action: utter_leave_proceed
+  - intent: leave_go
+  - action: leave_note
+  - active_loop: leave_note
+  # - slot_was_set:
+  #   - requested_slot: message2 
+  # - slot_was_set:
+  #   - message2: Im having sever cough and cold and so i will not be able to attend school for 2 days
+  - active_loop: null
+  # - slot_was_set:
+  #   - requested_slot: null
+  - action: leave_note_submit
+  - action: utter_did_that_help
+  - or:
+    - intent: affirm
+      entities:
+      - affirm: "yes"
+    - intent: deny
+      entities:
+      - deny: 'no'
+  - action: utter_goodbye
+  - slot_was_set:
+    - affirm: None
+  - action: utter_show_options
+
+# school timings
+- story: School timings happy
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: school_timings
+  - action: utter_school_timings
+  - action: utter_did_that_help
+  - or:
+    - intent: affirm
+      entities:
+      - affirm: "yes"
+    - intent: deny
+      entities:
+      - deny: 'no'
+  - action: utter_goodbye
+  - action: utter_show_options
+
+# Contact Emails
+- story: Email id path-1
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: seek_contact_teachers
+  - action: show_email_ids
+  - action: utter_did_that_help
+  - or:
+    - intent: affirm
+      entities:
+      - affirm: "yes"
+    - intent: deny
+      entities:
+      - deny: 'no'
+  - action: utter_goodbye
+  - action: utter_related_details_5
+
+- story: Email id path-2
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: seek_contact_teachers
+  - action: show_email_ids
+  - intent: id_affirm
+  - action: id_form
+  - active_loop: id_form
+  - active_loop: null
+  - action: show_email_ids
+  - action: utter_did_that_help
+  - or:
+    - intent: affirm
+      entities:
+      - affirm: "yes"
+    - intent: deny
+      entities:
+      - deny: 'no'
+  - action: utter_goodbye
+  - action: utter_related_details_5
+# Contact Emails
+
+- story: Contact_details-(other..)
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: seek_contact_school
+  - action: utter_contact_who
+  - intent: other_contacts
+  - action: school_contacts
+  - action: utter_did_that_help
+  - or:
+    - intent: affirm
+      entities:
+      - affirm: "yes"
+    - intent: deny
+      entities:
+      - deny: 'no'
+  - action: utter_goodbye
+  - action: utter_related_details_5
+
+- story: Contact_details-(contact_princi))
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: seek_contact_school
+  - action: utter_contact_who
+  - intent: contact_principal
+  - action: utter_message_now
+  - intent: principal_go
+  - action: principal_contact
+  - active_loop: principal_contact
+  # - slot_was_set:
+  #   - requested_slot: subject2
+  # - slot_was_set:
+  #   - subject2: Participation
+  # - slot_was_set:
+  #   - subject2: Participation
+  # - slot_was_set:
+  #   - requested_slot: message3
+  # - slot_was_set:
+  #   - message3: I want to take part in the upcoming competition
+  # - slot_was_set:
+  #   - message3: I want to take part in the upcoming competition
+  - active_loop: null
+  - action: action_send_princi
+  - action: utter_did_that_help
+  - or:
+    - intent: affirm
+      entities:
+      - affirm: "yes"
+    - intent: deny
+      entities:
+      - deny: 'no'
+  - action: utter_goodbye
+  - action: utter_related_details_5
+
+- story: Contact_details-(contact_princi))-sad
+  steps:
+  - intent: greet
+  - action: utter_show_options
+  - intent: seek_contact_school
+  - action: utter_contact_who
+  - intent: contact_principal
+  - action: utter_message_now
+  - intent: deny
+  - action: utter_show_options

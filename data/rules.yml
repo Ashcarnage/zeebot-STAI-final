@@ -1,0 +1,372 @@
+version: "2.0"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_bye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+# FORMS
+
+# OPTIONS
+- rule: display options whenver intent is seek_options
+  steps:
+  - intent: seek_options
+  - action: utter_show_options
+
+# ID
+- rule: Activate idno form
+  steps:
+  - action: utter_confirming_id
+  - intent: id_affirm
+  - action: id_form
+  - active_loop: id_form
+
+- rule: Id denied
+  steps:
+  - intent: id_deny
+  - action: utter_show_options
+
+# - rule: deny idno form
+#   steps:
+#   - action: utter_confirming_id
+#   - intent: deny
+#   - action: utter_show_options
+
+- rule: Interruption in idno form
+  condition:
+  - active_loop: id_form
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+  - action: id_form
+  - active_loop: id_form
+
+- rule: Submit idno form
+  condition:
+  - active_loop: id_form
+  steps:
+  - action: id_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  wait_for_user_input: false
+
+# - rule: force submit idno
+#   condition:
+#   - active_loop: id_form
+#   steps:
+#   - action: id_form
+#   - active_loop: null
+#   - slot_was_set:
+#     - requested_slot: null
+#   - action: utter_show_options
+
+# - rule: Exam syllabus submit idno
+#   condition:
+#   - active_loop: id_form
+#   steps:
+#   - action: id_form
+#   - active_loop: null
+#   - slot_was_set:
+#     - requested_slot: null
+#   - action: exam_form
+#   - active_loop: exam_form
+
+# EXAM FORM
+- rule: Activate exam form
+  steps:
+  - intent: seek_exam_syllabus
+  - action: exam_form
+  - active_loop: exam_form
+
+- rule: Interruption in exam form
+  condition:
+  - active_loop: exam_form
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+  - action: exam_form
+  - active_loop: exam_form
+
+- rule: Submit exam form
+  condition:
+  - active_loop: exam_form
+  steps:
+  - action: exam_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  wait_for_user_input: false
+  # - action: utter_related_details_4
+
+# - rule: Submit exam form path-2
+#   condition:
+#   - active_loop: exam_form
+#   steps:
+#   - action: exam_form
+#   - active_loop: null
+#   - slot_was_set:
+#     - requested_slot: null
+#   - action: action_show_exam_syllabus
+#   - intent: id_affirm
+#   - action: id_form
+#   - active_loop: id_form
+
+
+# COVID
+- rule: COVID info
+  steps:
+  - intent: seek_COVIDinfo
+  - action: action_show_COVIDinfo
+  - action: utter_show_options
+
+# FEES
+- rule: Show fee structure
+  steps:
+  - intent: seek_fees
+  - action: utter_show_fees
+  - action: utter_show_options
+
+# ADMISSION DETAILS
+- rule: Show admission details
+  steps:
+  - intent: seek_admission_details
+  - action: utter_show_admission_details
+  - action: utter_related_details_1
+
+# ACADEMIC CALENDAR FORM
+- rule: Activate exam form
+  steps:
+  - intent: seek_academic_calendar
+  - action: academic_calendar_form
+  - active_loop: academic_calendar_form
+
+- rule: Submit academic form
+  condition:
+  - active_loop: academic_calendar_form
+  steps:
+  - action: academic_calendar_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_show_academic_calendar
+  - action: utter_related_details_2
+
+# UNIFORM FORM
+- rule: Activate uniform form
+  steps:
+  - intent: seek_uniform
+  - action: uniform_form
+  - active_loop: uniform_form
+
+- rule: Submit uniform form
+  condition:
+  - active_loop: uniform_form
+  steps:
+  - action: uniform_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_show_uniform
+  - action: utter_show_options
+
+# HOLIDAY FORM
+- rule: Activate holiday form
+  steps:
+  - intent: seek_holiday
+  - action: holiday_form
+  - active_loop: holiday_form
+
+- rule: Submit holiday form
+  condition:
+  - active_loop: holiday_form
+  steps:
+  - action: holiday_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_show_holiday
+  - action: utter_related_details_6
+
+
+# ZOOM FORM
+# - rule: Activate zoom form
+#   steps:
+#   - intent: seek_zoom
+#   - action: zoom_form
+#   - active_loop: zoom_form
+
+# - rule: Submit zoom form
+#   condition:
+#   - active_loop: zoom_form
+#   steps:
+#   - action: zoom_form
+#   - active_loop: null
+#   - slot_was_set:
+#     - requested_slot: null
+#   - action: action_show_zoom
+
+### REPORT CARD FORM (MAYBE)
+
+# EVENTS FORM
+- rule: Activate events form
+  steps:
+  - intent: seek_events
+  - action: events_form
+  - active_loop: events_form
+
+- rule: Submit events form
+  condition:
+  - active_loop: events_form
+  steps:
+  - action: events_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_show_events
+  - action: utter_show_options
+
+# TIMETABLE FORM
+- rule: Activate timetable form
+  steps:
+  - intent: seek_timetable
+  - action: timetable_form
+  - active_loop: timetable_form
+
+- rule: Submit timetable form
+  condition:
+  - active_loop: timetable_form
+  steps:
+  - action: timetable_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_show_timetable
+  - action: utter_show_options
+
+# ZOOM RULE
+# - rule: zoom
+#   steps:
+#   - intent: seek_zoom
+#   - action: action_show_zoom
+#   - action: utter_related_details_6
+
+# REPORT CARD RULE
+- rule: report card - accepting email
+  steps:
+  - intent: seek_report_card
+  - action: report_card
+  - active_loop: report_card
+
+- rule : closing report card
+  condition:
+  - active_loop: report_card
+  steps:
+  - action: report_card
+  - active_loop: null
+  - slot_was_set: 
+    - requested_slot: null
+  wait_for_user_input: false
+  # - action: action_show_report_card
+  # - action: utter_related_details_3
+
+# - rule : closing report card path-2
+#   condition:
+#   - active_loop: report_card
+#   steps:
+#   - action: report_card
+#   - active_loop: null
+#   - slot_was_set: 
+#     - requested_slot: null
+#   - action: action_show_report_card
+#   - intent: id_affirm
+#   - action: id_form
+#   - active_loop: id_form
+
+# RESET ID 
+- rule: reset ID
+  steps:
+  - intent: reset_id
+  - action: action_reset_id
+# LEAVE NOTE
+- rule: get_message form
+  steps:
+  - intent: leave_go
+  - action: leave_note
+  - active_loop: leave_note
+
+- rule: send_message form
+  condition:
+  - active_loop: leave_note
+  steps:
+  - action: leave_note
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: leave_note_submit
+  wait_for_user_input: false
+# Contact princi
+- rule: get details to send to princi
+  steps:
+  - intent: principal_go
+  - action: principal_contact
+  - active_loop: principal_contact
+- rule: submit email to princi
+  condition:
+  - active_loop: principal_contact
+  steps:
+  - action: principal_contact
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_send_princi
+  wait_for_user_input: false
+
+# Send email
+- rule: Sending an email (setting slots)
+  steps: 
+  - intent: send_email
+  - action: send_email_form
+  - active_loop: send_email_form
+- rule: Emailing action
+  condition:
+  - active_loop: send_email_form
+  steps:
+  - action: send_email_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: email_submit
+  wait_for_user_input: false      
+    
+- rule: Implementation of the Two-Stage-Fallback
+  steps: 
+  - intent: nlu_fallback
+  - action: nlu_fallback
+  - active_loop: nlu_fallback
+
+- rule: out of scope
+  condition:
+  - active_loop: nlu_fallback
+  steps:
+  - action: nlu_fallback
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_default_fallback
+  - active_loop: action_default_fallback
+
+- rule: closing out_of_scope
+  condition:
+  - active_loop: action_default_fallback
+  steps:
+  - action: action_default_fallback
+  - active_loop: null
+  - action: utter_show_options

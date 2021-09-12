@@ -1,0 +1,444 @@
+version: "2.0"
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+    - Hi
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+- intent: affirm
+  examples: |
+    - [Yes](affirm)
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+- intent: deny
+  examples: |
+    - [no](deny)
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+- intent: seek_options
+  examples: |
+    - What are your capabilities?
+    - What can you do?
+    - What all can you do?
+    - What are my options?
+    - What else is there?
+    - show options
+- intent: stop
+  examples: |
+    - I changed my mind.
+    - I don't want to continue.
+    - Show me something else.
+    - I changed my mind
+- intent: fill_id_info
+  examples: |
+    - I want to fill my info
+    - can i give you my information
+    - take my details please
+    - info
+    - My id number is [13493](idno)
+    - [13493](idno)
+    - [123456](idno) is my ID
+- intent: seek_school_vid
+  examples: |
+    - I want to see the school video.
+    - Show me the school video.
+    - Can i see the school video?
+- intent: seek_school_location
+  examples: |
+    - where is the school located
+    - school location
+    - give me the school's location
+    - where is the school
+    - can you give a map reference of the school
+- intent: seek_exam_syllabus
+  examples: |
+    - What is [preboard](exam) syllabus for [Maths](subject1)?
+    - Show me [periodic](exam) test syllabus
+    - class [11A](class) [physics](subject1) syllabus for [half yearly](exam)
+    - [final](exam) exam syllabus of class [11](class)
+    - [preboard](exam) syllabus of [phy](subject1) class [12](class)
+    - [final](exam) exam syllabus for class [11B](class)
+    - exam syllabus for class [11](class)
+    - exam syllabus for class [12](class)
+    - exam syllabus for class [11A](class)
+    - exam syllabus for class [11B](class)
+    - exam syllabus for class [11C](class)
+    - exam syllabus for class [11D](class)
+    - exam syllabus for class [11E](class)
+    - exam syllabus for class [12A](class)
+    - exam syllabus for class [12B](class)
+    - exam syllabus for class [12C](class)
+    - exam syllabus for class [12D](class)
+    - exam syllabus for class [12E](class)
+    - /exam_syllabus{"exam":"periodic"}
+    - /exam_syllabus{"exam":"final"}
+    - /exam_syllabus{"subject1":"cs"}
+    - [final](exam) exam syllabus
+    - [11](class)
+    - /exam_syllabus{"subject1":"maths"}
+    - [mathematics](subject1) class [11](class) [final](exam) exam syllabus
+    - [math](subject1)
+    - [chem](subject1)
+    - [chemistry](subject1)
+    - [eng](subject1)
+    - [english](subject1)
+    - [cs](subject1)
+    - [computer science](subject1)
+    - [comp science](subject1)
+    - [compsci](subject1)
+    - [periodic](exam)
+    - [periodic test](exam)
+    - [periodic exam](exam)
+    - [half yearly](exam)
+    - [halfyearly](exam)
+    - [half yearly exam](exam)
+    - [final](exam)
+    - [final exam](exam)
+    - [final test](exam)
+    - [preboard](exam)
+    - [pre board](exam)
+    - [mock test](exam)
+    - [mock exam](exam)
+    - [final](exam) exam syllabus for class [11](class)
+    - class [11](class) [physics](subject1) syllabus
+    - [physics](subject1) class [11](class) [final](exam) exam syllabus
+    - [maths](subject1) class [11](class) [final](exam) exam syllabus
+    - exam syllabus
+    - exam syllabus for [11B](class)
+- intent: seek_timetable
+  examples: |
+    - [12B](class)
+    - could you help me with the time table?
+    - timetable
+    - what is the timetable for class [12A](class) ?
+    - what is the timetable for class [12B](class) ?
+    - what is the timetable for class [12C](class) ?
+    - what is the timetable for class [12D](class) ?
+    - can you give the timetable?
+    - /seek_timetable_help
+    - show timtable
+    - show class timetable of [12C](class)
+- intent: seek_exam_timetable
+  examples: |
+    - please show me the exam dates
+    - when are the exams
+    - show exam date sheet
+    - can you give me the exam timetable
+    - Exam Timetabele
+    - Can you give the exam date sheet?
+- intent: seek_COVIDinfo
+  examples: |
+    - Can i have the number of covid cases
+    - what are the number of covid cases
+    - covid 19
+    - what are the cases
+- intent: seek_fees
+  examples: |
+    - what's the fee structure of XYZ?
+    - What's the cost of studying in XYZ?
+    - what is the fees ?
+- intent: seek_admission_details
+  examples: |
+    - can you give some details regarding admission?
+    - admission details
+    - Is there an overview of admission critarian
+    - What details can you provide on admissions?
+- intent: seek_academic_calendar
+  examples: |
+    - can you show the school calendar
+    - give me the academic calendar of 2021-22
+    - what the academic calendar for the 2021-22
+    - show me the calendar
+    - academic calendar for [June](month)
+    - academic calendar for [January](month)
+    - academic calendar for [February](month)
+    - academic calendar for [March](month)
+    - academic calendar for [April](month)
+    - academic calendar for [May](month)
+    - academic calendar for [July](month)
+    - academic calendar for [August](month)
+    - academic calendar for [September](month)
+    - academic calendar for [October](month)
+    - academic calendar for [November](month)
+    - academic calendar for [December](month)
+- intent: seek_uniform
+  examples: |
+    - can you please show me the school uniform
+    - what is the school uniform
+    - school uniform
+    - show me uniform for [senior](uniform) section
+    - show me uniform for [junior](uniform) section
+- intent: seek_holiday
+  examples: |
+    - When are the holiday
+    - holidays
+    - when is the [summer break](break)
+    - when is the [winter break](break)
+- intent: seek_zoom
+  examples: |
+    - What is the zoom details of [12A](class)?
+    - What is the zoom details of [12B](class)?
+    - What is the zoom details of [12C](class)?
+    - What is the zoom details of [12D](class)?
+    - What is the zoom details of [12E](class)?
+    - Could you tell me the zoom id for class [11A](class)?
+    - Could you tell me the zoom id for class [11B](class)?
+    - Could you tell me the zoom id for class [11C](class)?
+    - Could you tell me the zoom id for class [11D](class)?
+    - Could you tell me the zoom id for class [11E](class)?
+    - show me my class zoom id
+    - what is the zoom details of class [12D](class)?
+    - zoom id for class [11A](class)
+    - what is the zoom details of [12C](class)?
+    - could you show me zoom ids
+    - show me my class zoom details
+    - what are the zoom meeting IDs?
+- intent: seek_report_card
+  examples: |
+    - Please show my report card
+    - show me my child's marksheet
+    - Periodic test results
+    - marksheet of half yearly exam
+    - kindly show me final exam report card
+    - is it possible to view my child's report card?
+    - is it possible to view my child's marksheet?
+    - could you send email of report card?
+    - could you send email of mark sheet?
+    - periodic test result
+- intent: seek_events
+  examples: |
+    - What are the upcoming events this year?
+    - Which events are taking place this year?
+    - What are the activities this year?
+    - Which events can i participate in?
+    - Which activities can i participate in?
+    - Which conferences can i participate in?
+    - Which competitions can i participate in?
+- intent: chitchat
+  examples: |
+    - What's the weather like?
+    - What is the meaning of life?
+    - How is the weather right now?
+- intent: seek_contact_school
+  examples: |
+    - How can i contact the school?
+    - I want to contact the school.
+    - What is the Principal's Email Address?
+    - What is the Vice-Principal's Email Address?
+- intent: seek_contact_teachers
+  examples: |
+    - Show me email IDs of [12A](class) teachers
+    - What are the email IDs of [12B](class) teachers?
+    - Tell me what the email IDs of class [12C](class) teachers is.
+- intent: id_affirm
+  examples: |
+    - yes i want to fill in the id
+- intent: reset_id
+  examples: |
+    - Let me reset my id
+    - reset my student ID
+    - cancel the current student ID
+- intent: id_deny
+  examples: |
+    - No i am not interested to fill the ID
+    - i dont wanna fill the ID
+- intent: send_email
+  examples: |
+    - I want to send an email to
+    - send email
+    - How can i send an email
+- intent: human_handoff
+  examples: |
+    - [I want a human](transfer)
+    - [no thanks](transfer)
+    - [no thankyou](transfer)
+    - [human](transfer)
+- intent: mail_id_email
+  examples: |
+    - [xyzinternational.s@gmail.com](email)
+    - the email is [principalxyzschool@gmail.com](email)
+    - [bhakat2004@gmail.com](email)
+- intent: mail_id_subject
+  examples: |
+    - [Participation in a competetion](subject)
+    - [Participation](subject)
+    - [To take a tc](subject)
+    - [TC](subject)
+    - [Recommendation](subject)
+    - [Scholarship](subject)
+    - [Delay](subject)
+    - [Complaint](subject)
+    - [Donations](subject)
+    - [Competition](subject)
+- intent: mail_id_message
+  examples: |
+    - [Hello this is a meesage from the xyz chatbot](message)
+    - [I want to take part in the upcoming competition](message)
+    - [i like money.](message)
+    - [Im having sever cough and cold and so i will not be able to attend school for 2 days](message)
+    - [Due to the rapid spread of the covid 19 virus, i will be able to come for schooling for atleast a weeks time](message)
+    - [Since im having a competative exam tomorrow i will not be coming](message)
+    - i want to try my bot.
+- intent: principal_go
+  examples: |
+    - email now
+    - email principal
+    - lets get on with the email
+- intent: Leave_application
+  examples: |
+    - I want to write a leave application
+    - Can i write a leave note
+    - leave note
+    - leave application
+    - i want to take a leave
+- intent: leave_go
+  examples: |
+    - send leave note now
+    - please send the leave letter
+    - email leave note now
+- intent: email_details
+  examples: |
+    - Please tell me the email id of my teachers
+    - could you tell me the email address of teachers of class [11A](class)?
+    - could you tell me the email address of teachers of class [11B](class)?
+    - could you tell me the email address of teachers of class [11C](class)?
+    - could you tell me the email address of teachers of class [11D](class)?
+    - could you tell me the email address of teachers of class [11E](class)?
+    - could you tell me the email address of teachers of class [12A](class)?
+    - could you tell me the email address of teachers of class [12B](class)?
+    - could you tell me the email address of teachers of class [12C](class)?
+    - could you tell me the email address of teachers of class [12D](class)?
+    - could you tell me the email address of teachers of class [12E](class)?
+- intent: school_timings
+  examples: |
+    - what are the school timings?
+    - School timings
+    - can you give the school timings
+    - the timings
+- intent: other_contacts
+  examples: |
+    - give me all contact numbers
+    - contact school
+- intent: contact_principal
+  examples: |
+    - I want to contact the principal
+    - can i email the principal
+    - The principal
+- synonym: Hello this is a meesage from the xyz chatbot
+  examples: |
+    - This is a message from the xyz chatbot
+    - This is the xyz chatbot
+    - This is a test message
+- synonym: I want to take part in the upcoming competition
+  examples: |
+    - I would like to take part in the upcoming competition
+    - This is to inform you that i want to take part in the upcoming competition
+    - I would like to take oart in the upcoming competition. Could you please give me the details for the same.
+    - I would like to take part in the forthcoming swimming competition
+    - can i take part in the upcoming competition
+    - To take part in a competition
+- synonym: Im having sever cough and cold and so i will not be able to attend school for 2 days
+  examples: |
+    - Due to sever cough and cold, I will not be able to attend school for the next 2 days.
+    - Im an extreamly sick. could you please give an excuse for my absence.
+    - I feel very sick so i will not be able to attend school.
+    - I have cough and cold
+    - Cough and cold
+- synonym: Due to the rapid spread of the covid 19 virus, i will be able to come for schooling for atleast a weeks time
+  examples: |
+    - In order to seek precaution, i will not be attending school for the next few weeks
+    - As the covid 19 cases have risen, i will not attend school for a few days
+    - The covid cases have significantly risen so to be on the safe side , i will not be attending school for a few days
+    - Due to covid i will not be coming
+    - covid
+- synonym: Since im having a competative exam tomorrow i will not be coming
+  examples: |
+    - I have an exam tomorrow
+    - upcoming exam
+    - i will not be coming because the exams are nearing
+    - Due to exams
+- regex: email
+  examples: |
+    - .*\.com$
+- regex: idno
+  examples: |
+    - \d{5,6}
+- regex: message
+  examples: |
+    - .*\.$
+    - .*\?$
+    - ^Dear.*\.$
+    - ^Dear.*\?$
+    - ^dear.*\.$
+    - ^dear.*\?$
+- regex: name
+  examples: |
+    - .*\_$
