@@ -106,6 +106,7 @@ nlu:
     - My id number is [13493](idno)
     - [13493](idno)
     - [123456](idno) is my ID
+    - [10582](idno)
 - intent: seek_school_vid
   examples: |
     - I want to see the school video.
@@ -229,6 +230,8 @@ nlu:
     - academic calendar for [October](month)
     - academic calendar for [November](month)
     - academic calendar for [December](month)
+    - /seek_academic_calendar
+    - /seek_academic_calendar{"month":"October"}
 - intent: seek_uniform
   examples: |
     - can you please show me the school uniform
@@ -261,6 +264,7 @@ nlu:
     - could you show me zoom ids
     - show me my class zoom details
     - what are the zoom meeting IDs?
+    - /seek_zoom
 - intent: seek_report_card
   examples: |
     - Please show my report card
@@ -273,6 +277,7 @@ nlu:
     - could you send email of report card?
     - could you send email of mark sheet?
     - periodic test result
+    - /seek_report_card
 - intent: seek_events
   examples: |
     - What are the upcoming events this year?
@@ -298,9 +303,14 @@ nlu:
     - Show me email IDs of [12A](class) teachers
     - What are the email IDs of [12B](class) teachers?
     - Tell me what the email IDs of class [12C](class) teachers is.
+    - /seek_contact_teachers
 - intent: id_affirm
   examples: |
     - yes i want to fill in the id
+    - yes im filling the ID
+    - ok i will fill the ID
+    - alright im filling the ID
+    - /id_affirm
 - intent: reset_id
   examples: |
     - Let me reset my id
@@ -310,6 +320,8 @@ nlu:
   examples: |
     - No i am not interested to fill the ID
     - i dont wanna fill the ID
+    - i dont have an ID
+    - not interested to fill
 - intent: send_email
   examples: |
     - I want to send an email to
@@ -326,6 +338,7 @@ nlu:
     - [xyzinternational.s@gmail.com](email)
     - the email is [principalxyzschool@gmail.com](email)
     - [bhakat2004@gmail.com](email)
+    - [abcd@gmail.com](email)
 - intent: mail_id_subject
   examples: |
     - [Participation in a competetion](subject)
@@ -387,6 +400,7 @@ nlu:
   examples: |
     - give me all contact numbers
     - contact school
+    - other contacts
 - intent: contact_principal
   examples: |
     - I want to contact the principal

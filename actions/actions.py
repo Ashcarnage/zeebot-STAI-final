@@ -3,7 +3,7 @@ from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker, FormValidationAction
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.events import SlotSet, EventType
+from rasa_sdk.events import FollowupAction, SlotSet, EventType
 import webbrowser
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -94,7 +94,7 @@ class ExamSyllabus(Action):
         elif a==None:
             dispatcher.utter_message(text="Student ID is required to access meeting ID's. Please enter you ID")
             dispatcher.utter_message(response="utter_confirming_id")
-        
+            return[FollowupAction("action_listen")]
 class ActionCovid(Action):
     def name(self) -> Text:
        return "action_show_COVIDinfo"
@@ -191,7 +191,9 @@ class ZoomIDS(Action):
         elif r == None:
             dispatcher.utter_message(text="Student ID is required to access meeting ID's. Please enter your ID")
             dispatcher.utter_message(response="utter_confirming_id")
+            dispatcher.utter_message(response="action_listen")
             #return [SlotSet("idno", "needed_for_zoom")]
+            return[FollowupAction("action_listen")]
         
 class ReportCard(Action):
 
@@ -218,9 +220,10 @@ class ReportCard(Action):
             return [SlotSet("email", None)]
         if r == None:
             dispatcher.utter_message(text="Student ID is required to access meeting ID's. Please enter you ID")
-            dispatcher.utter_message(response= "utter_confirming_id")
+            dispatcher.utter_template(template= "utter_confirming_id",tracker= Tracker)
+            #dispatcher.utter_message(Action= "action_listen")
             #return [SlotSet("idno", "needed_for_report")]
-
+            return[FollowupAction("action_listen")]
 class Events(Action):
 
     def name(self) -> Text:
@@ -288,7 +291,7 @@ class LeaveSubmit(Action):
     ) -> List[Dict[Text, Any]]:
 
         SendEmail1(tracker.get_slot("message2"),toaddr='xyzinternational.s@gmail.com',subject='Leave Note')
-        dispatcher.utter_message(text="Thanks for providing the message. We have sent a mail regarding your absence to the school officials")
+        dispatcher.utter_message(text="Thanks for providing the message.\n\n We have sent a mail at (xyzinternational.s@gmail.com) regarding your absence to the school officials")
         return []
 def SendEmail1(message,toaddr,subject):
     fromaddr = "chatbotxyz2021@gmail.com"
@@ -377,7 +380,8 @@ class EmailIDS(Action):
                     dispatcher.utter_message(text="Here are the Email ids of the teachers of class {}".format(r[1]),image=val)
         elif r==None:
             dispatcher.utter_message(text= "Student ID is required to access contact details please fill in your ID ")
-            dispatcher.utter_message(response="utter_confirming_id")
+            dispatcher.utter_template(template="utter_confirming_id",tracker=Tracker)
+            return[FollowupAction("action_listen")]
 
 class SchoolContactsSendEmail(Action):
     def name(self) -> Text:
@@ -394,7 +398,8 @@ class ActionDefaultFallback(Action):
         return "action_default_fallback"
     def run(self, dispatcher: "CollectingDispatcher", tracker: Tracker, domain: "DomainDict") -> List[Dict[Text, Any]]:   
         transfer = tracker.get_slot("transfer")
+        print(transfer)
         if transfer=="human" :
-            dispatcher.utter_message(text=" not available ")
-        else:
+            dispatcher.utter_message(text=" Agend not available ")
+        elif transfer=="no thanks":
             dispatcher.utter_message(text="I can do better if you rephrase your question!")

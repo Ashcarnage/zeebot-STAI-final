@@ -23,7 +23,7 @@ rules:
 # ID
 - rule: Activate idno form
   steps:
-  - action: utter_confirming_id
+  #- action: utter_confirming_id
   - intent: id_affirm
   - action: id_form
   - active_loop: id_form
@@ -213,7 +213,10 @@ rules:
 #     - requested_slot: null
 #   - action: action_show_zoom
 
-### REPORT CARD FORM (MAYBE)
+- rule: stop trigering actions randomly
+  steps:
+  - action: utter_confirming_id
+  - action: action_listen
 
 # EVENTS FORM
 - rule: Activate events form

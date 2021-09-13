@@ -288,8 +288,15 @@ responses:
   utter_ask_transfer:
   - buttons:
     - payload: /human_handoff{{"transfer":"human"}}
-    text: "Hmmm, good question!\n\nSorry, I can't seem to find the right answer for you \n\nI can connect to a human if you like"
- 
+      title: Handoff to a Human
+    - payload: /human_handoff{{"transfer":"no thanks"}}
+      title: No
+    text: |-
+      Hmmm, good question!
+
+      Sorry, I can't seem to find the right answer for you 
+
+      I can connect to a human if you like
   utter_ask_idno:
   - text: Please enter your ID number.
   utter_ask_email:

@@ -12,7 +12,7 @@ pipeline:
   - name: DIETClassifier
     epochs: 100
   - name: FallbackClassifier
-    threshold: 0.7
+    threshold: 0.2
 #  - name: DucklingEntityExtractor
 #    url: http://duckling.rasa.com:8000
 #    dimensions:
@@ -31,10 +31,12 @@ pipeline:
 #    dimensions: ["PERSON"]
 #  - name: EntitySynonymMapper
 policies:
+- name: FormPolicy
 - name: AugmentedMemoizationPolicy
 - name: TEDPolicy
   epochs: 40
 - name: RulePolicy
-  core_fallback_threshold: 0.4
+  core_fallback_threshold: 0.2
   core_fallback_action_name: "action_default_fallback"
   enable_fallback_prediction: True
+
