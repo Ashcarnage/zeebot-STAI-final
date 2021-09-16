@@ -92,7 +92,7 @@ class ExamSyllabus(Action):
 
             return [SlotSet("class", None), SlotSet("exam", None), SlotSet("subject1", None)]
         elif a==None:
-            dispatcher.utter_message(text="Student ID is required to access meeting ID's. Please enter you ID")
+            dispatcher.utter_message(text="Student ID is required. Please enter you ID")
             dispatcher.utter_message(response="utter_confirming_id")
             return[FollowupAction("action_listen")]
 class ActionCovid(Action):
@@ -219,7 +219,7 @@ class ReportCard(Action):
             dispatcher.utter_message(text= "Additionally, I have emailed {}'s Report card ".format(r[3]))
             return [SlotSet("email", None)]
         if r == None:
-            dispatcher.utter_message(text="Student ID is required to access meeting ID's. Please enter you ID")
+            dispatcher.utter_message(text="Student ID is required to access your Reportcard. Please enter you ID")
             dispatcher.utter_template(template= "utter_confirming_id",tracker= Tracker)
             #dispatcher.utter_message(Action= "action_listen")
             #return [SlotSet("idno", "needed_for_report")]
@@ -400,6 +400,8 @@ class ActionDefaultFallback(Action):
         transfer = tracker.get_slot("transfer")
         print(transfer)
         if transfer=="human" :
-            dispatcher.utter_message(text=" Agend not available ")
+            dispatcher.utter_message(text="You can get in touch at \n\n xyzinternational.s@gmail.com")
+            return[SlotSet("transfer",None)]
         elif transfer=="no thanks":
             dispatcher.utter_message(text="I can do better if you rephrase your question!")
+            return[SlotSet("transfer",None)]
